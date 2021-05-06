@@ -1,0 +1,43 @@
+{
+  "name": "basic-redux",
+  "version": "1.0.0",
+  "description": "Simple React app using Redux for state management.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "start": "node dist/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iromero25/basic-redux.git"
+  },
+  "keywords": [],
+  "author": "iromero25",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iromero25/basic-redux/issues"
+  },
+  "homepage": "https://github.com/iromero25/basic-redux#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
+    "ts-node": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.11.10",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.3",
+    "html-webpack-plugin": "^4.0.0",
+    "ts-loader": "^7.0.0",
+    "typescript": "^3.9.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
