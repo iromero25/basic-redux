@@ -1,7 +1,7 @@
 # basic-redux
-Simple React app using Redux for state management.
+Simple React app using Redux for state management. Typescrypt is used as programming language.
 
-Why can this project be useful?
+**Why can this project be useful?**
 
 1. It implements a very simple use case of React state management using the Redux library.
 1. The app utilizes React's function components and relies on Typescript for code typing, therefore typescript configuration is required.
@@ -9,11 +9,11 @@ Why can this project be useful?
 
 ## ts-loader
 
-As mentioned, I am trying to avoid relying on babel, therefore `ts-loader` is in charge of all the tasks babel is in charge of like javascrip and JSX transpiling.
+As mentioned, I am avoiding babel, therefore `ts-loader` is in charge of all the tasks babel is in charge of like javascript and JSX transpiling.
 The reasons I wanted to move away from babel:
 
-1. We need to compile typescript code into a version of javascript that can be handle by all (or a majority of) browsers and that's done by `ts-loader` so why having babel as well?
-1. Babel can deal with typescript compiling but seems we still need to use `ts-loader` no matter what. Also, some documentation mentions while babel does check code for typing, it still allows us to compile the code, so I wanted to avoid that.
+1. We need to compile typescript code into a version of javascript that can be handled by all (or a majority of) browsers and that's done by `ts-loader` so why having babel as well?
+1. Babel can deal with typescript compiling but seems we still need to use `ts-loader` no matter what. Also, some documentation mentions while babel does check code for typing, it still allows us to compile the code withouth enforcing typing, so I wanted to avoid that.
 
 ## webpack configuration
 
@@ -26,7 +26,7 @@ The targets we need to use are `web` for client bundle code (default) and `node`
 Look at the [official docs](https://webpack.js.org/concepts/targets/) where this is documented.
 
 ## server
-I am avoifing using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
+I am avoiding using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
 Since we take care of compiling the `server.ts` file into javascript code in the `dist` file, then `node` can be used to run the server.
 
 ## notes on dependencies
