@@ -14,18 +14,22 @@ const NoteForm: React.FC<Props> = props => {
   const [tag, setTag] = useState<TagValues>(TagValues.normal);
   const titleRef = useRef<HTMLInputElement>(null);
 
+  // interface Event {
+  //   preventDefault: () => void;
+  // }
+
   // add the note by dispathcing the `addNote` action (using the addNote
   // action creator). I believe there's another way to handle this
-  const handleSubmission = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmission = (
+    e: React.FormEvent<HTMLFormElement> /* alternative: e: Event */
+  ) => {
     e.preventDefault();
     props.addNote(title, content, tag);
     setTitle("");
     setContent("");
 
-    if (titleRef.current) {
-      // set focus to the Input DOM element this reference points at
-      titleRef.current.focus();
-    }
+    // set focus to the Input DOM element this reference points at
+    titleRef.current?.focus();
   };
 
   const tagValues = Object.values(TagValues).filter(
