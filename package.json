@@ -39,5 +39,8 @@
     "typescript": "^3.9.5",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
