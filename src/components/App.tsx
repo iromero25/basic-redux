@@ -1,13 +1,13 @@
 import React from "react";
-// import NotesForm from "./NotesForm";
-// import AllNotes from "./AllNotes";
+import NoteForm from "./NoteForm";
+import AllNotes from "./AllNotes";
 
 const App = () => (
   <>
     <h1>React Redux Notes App</h1>
-    {/* <NotesForm />
+    <NoteForm />
     <hr />
-    <AllNotes /> */}
+    <AllNotes />
   </>
 );
 
