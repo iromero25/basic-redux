@@ -42,5 +42,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": "^10.14.1 || ^12.8.1",
+    "yarn": "<1.22.0"
   }
 }
