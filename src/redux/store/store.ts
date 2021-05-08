@@ -10,11 +10,17 @@ export interface Store {
 const initialState: Partial<Store> = {
   notes: [
     {
+      id: 1,
       title: "You are awesome",
       content: "No, wait, I meant legendary!",
       tag: TagValues.normal,
     },
-    { title: "Ooops", content: "I was talking to myself", tag: TagValues.normal },
+    {
+      id: 2,
+      title: "Ooops",
+      content: "I was talking to myself",
+      tag: TagValues.normal,
+    },
   ],
 };
 

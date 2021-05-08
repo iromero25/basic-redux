@@ -39,7 +39,7 @@ const AllNotes: React.FC<Props> = ({
         {notesToDisplay.map((note, index) => (
           <li key={index} style={{ marginBottom: 8 }}>
             <b>{note.title}</b>
-            <button onClick={() => removeNote(index)} style={{ marginLeft: 5 }}>
+            <button onClick={() => removeNote(note.id)} style={{ marginLeft: 5 }}>
               x
             </button>
             <br />

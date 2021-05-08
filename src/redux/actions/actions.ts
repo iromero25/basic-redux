@@ -3,7 +3,7 @@ export const FILTER_NOTE = "FILTER_NOTE";
 export const REMOVE_NOTE = "REMOVE_NOTE";
 
 export type ActionType = typeof ADD_NOTE | typeof FILTER_NOTE | typeof REMOVE_NOTE;
-export type Note = { title: string; content: string; tag: string };
+export type Note = { id: number, title: string; content: string; tag: string };
 export type NoteId = { id: number };
 export type Tag = { tag: TagValues };
 
