@@ -54,7 +54,7 @@ const NoteForm: React.FC<Props> = props => {
         <textarea
           name="content"
           value={content}
-          style={{ width: elementWidth * 1.4, height: 90 }}
+          style={{ width: elementWidth * 1.5, height: 90 }}
           onChange={e => setContent(e.target.value)}
         ></textarea>
         <br />

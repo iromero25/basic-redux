@@ -1,8 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Note, TagValues, updateVisibility } from "../redux/actions/actions";
 import { Store } from "../redux/store/store";
-import { removeNote } from "../redux/actions/actions";
+import {
+  Note,
+  TagValues,
+  removeNote,
+  updateVisibility,
+} from "../redux/actions/actions";
 
 type Props = {
   notes: Note[];

@@ -37,3 +37,12 @@ Since we take care of compiling the `server.ts` file into javascript code in the
 
 ## notes on dependencies
 Version 4 of `html-webpack-plugin` is required instead of version 5 as the latter presents an error when specifying the plugin configuration to move the `src/index.html` file into `dist`
+
+## NPM Registry and Library dependencies
+The *npm registry* is the repository location used as source to install all the library dependencies specified in `package.json`. Often, the registy points to a corporate (and thus private) repository that is managed by the company we work for. To have a look at the registry's configuration, we can use `yarn config get registry`. If this is the case, all dependencies in the `yarn.lock` file will be pointing to a place in that private registry URL where the libraries reside.
+
+This is bad thing to do specially when deploying to Heroku as it doesn't (and should never) have access to a corporate registry, therefore, the libraries won't be found nor installed.
+
+To avoid this, the registry is overridden at the `package.json` file but it is also possible to install all dependencies specifying the registry manually as a one-off to point to npm's public repo with the following command:
+
+`YARN_REGISTRY=https://registry.npmjs.org yarn install`
