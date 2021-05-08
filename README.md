@@ -1,6 +1,8 @@
 # basic-redux
 Simple React app using Redux for state management. Typescrypt is used as programming language.
 
+The working app is available at this [url](https://iromero-basic-redux.herokuapp.com/).
+
 **Why can this project be useful?**
 
 1. It implements a very simple use case of React state management using the Redux library.
