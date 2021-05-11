@@ -7,6 +7,7 @@ The working app is available at this [url](https://iromero-basic-redux.herokuapp
 
 1. It implements a very simple use case of React state management using the Redux library.
 1. The app utilizes React's function components and relies on Typescript for code typing, therefore typescript configuration is required.
+1. We go a little step further and use typescript with Redux-related functions as well.
 1. Usage of Babel is discouraged and thus I try to rely on `ts-loader` for code transpiling and JSX handling. This configuration is tightly coupled with webpacks' config.
 
 **Interesting parts to look at in the codebase**

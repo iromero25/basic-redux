@@ -1,32 +1,32 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Store } from "../redux/store/store";
-import {
-  Note,
-  TagValues,
+import { TagValues, removeNote, updateVisibility } from "../redux/actions/actions";
+
+const mapStateToProps = (state: Store) => ({
+  notes: state.notes,
+  visibility: state.visibility,
+});
+
+const mapDispatchToProps = {
   removeNote,
   updateVisibility,
-} from "../redux/actions/actions";
-
-type Props = {
-  notes: Note[];
-  visibility: TagValues;
-  removeNote: (id: number) => void;
-  updateVisibility: (tag: TagValues) => void;
 };
 
-const tagValues = Object.values(TagValues);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxProps = ConnectedProps<typeof connector>;
 
 // I know we are mapping state (and dispatch) to props and thus we don't
 // necessarily pass any props down from this component's parent, but we
 // still have to specify the props parameter so we can reference it  in
 // the code!
-const AllNotes: React.FC<Props> = ({
+const AllNotes: React.FC<ReduxProps> = ({
   notes,
   visibility,
   removeNote,
   updateVisibility,
 }) => {
+  const tagValues = Object.values(TagValues);
   const notesToDisplay =
     visibility === TagValues.showAll
       ? notes
@@ -66,14 +66,4 @@ const AllNotes: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: Store) => ({
-  notes: state.notes,
-  visibility: state.visibility,
-});
-
-const mapDispatchToProps = {
-  removeNote,
-  updateVisibility,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllNotes);
+export default connector(AllNotes);

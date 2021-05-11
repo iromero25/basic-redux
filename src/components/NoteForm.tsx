@@ -1,18 +1,32 @@
 import React, { useState, useRef } from "react";
-import { connect } from "react-redux";
-import { AddNoteAction, TagValues, addNote } from "../redux/actions/actions";
+import { connect, ConnectedProps } from "react-redux";
+import { addNote, TagValues } from "../redux/actions/actions";
 
-interface Props {
-  addNote: (title: string, content: string, tag: TagValues) => AddNoteAction;
-}
+const mapDispatchToProps = {
+  addNote,
+};
 
-const elementWidth = 160;
+// `connect` is a Higher Order Component (Function?). So it returns a  function
+// that in turn, takes another Component as parameter. A HOC is a pure function.
+const connector = connect(
+  null, // mapStateToProps is null, we don’t care about what’s in the store
+  mapDispatchToProps
+);
 
-const NoteForm: React.FC<Props> = props => {
+// Instead of doing this:
+// interface Props {
+//   addNote: (title: string, content: string, tag: TagValues) => AddNoteAction;
+// }
+
+// We can do this:
+type ReduxProps = ConnectedProps<typeof connector>;
+
+const NoteForm: React.FC<ReduxProps> = ({ addNote }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tag, setTag] = useState<TagValues>(TagValues.normal);
   const titleRef = useRef<HTMLInputElement>(null);
+  const elementWidth = 160;
 
   // interface Event {
   //   preventDefault: () => void;
@@ -24,7 +38,7 @@ const NoteForm: React.FC<Props> = props => {
     e: React.FormEvent<HTMLFormElement> /* alternative: e: Event */
   ) => {
     e.preventDefault();
-    props.addNote(title, content, tag);
+    addNote(title, content, tag);
     setTitle("");
     setContent("");
 
@@ -82,14 +96,4 @@ const NoteForm: React.FC<Props> = props => {
   );
 };
 
-const mapDispatchToProps = {
-  addNote: addNote,
-};
-
-// `connect` is a Higher Order Component (Function?) that returns
-// a function that in turn, takes another Component as parameter.
-// a HOC is a pure function
-export default connect(
-  null, // mapStateToProps is null, we don’t care about what’s in the store
-  mapDispatchToProps
-)(NoteForm);
+export default connector(NoteForm);
