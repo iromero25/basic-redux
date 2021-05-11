@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
-import { Action, TagValues, addNote } from "../redux/actions/actions";
+import { AddNoteAction, TagValues, addNote } from "../redux/actions/actions";
 
 interface Props {
-  addNote: (title: string, content: string, tag: TagValues) => Action;
+  addNote: (title: string, content: string, tag: TagValues) => AddNoteAction;
 }
 
 const elementWidth = 160;

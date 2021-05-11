@@ -1,13 +1,21 @@
-import { createStore } from "redux";
-import { Note, TagValues } from "../actions/actions";
-import reducers from "../reducers/reducers";
+import { combineReducers, createStore } from "redux";
+import notesReducer from "../reducers/notesReducer";
+import visibilityReducer from "../reducers/visibilityReducer";
+import { TagValues } from "../actions/actions";
 
-export interface Store {
-  notes: Note[];
-  visibility: TagValues;
-}
+// export interface Store {
+//   notes: Note[];
+//   visibility: TagValues;
+// }
 
-const initialState: Partial<Store> = {
+const rootReducer = combineReducers({
+  notes: notesReducer,
+  visibility: visibilityReducer,
+});
+
+export type Store = ReturnType<typeof rootReducer>;
+
+const initialState = {
   notes: [
     {
       id: 1,
@@ -22,6 +30,7 @@ const initialState: Partial<Store> = {
       tag: TagValues.normal,
     },
   ],
+  visibility: undefined,
 };
 
-export default createStore(reducers, initialState as any); // I need to avoid typing it as any
+export default createStore(rootReducer, initialState as any); // I still have the problem typing the intitial state

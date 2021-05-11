@@ -1,6 +1,6 @@
-import { ADD_NOTE, REMOVE_NOTE, Action, Note, NoteId } from "../actions/actions";
+import { ADD_NOTE, REMOVE_NOTE, AddNoteAction, RemoveNoteAction, Note, NoteId } from "../actions/actions";
 
-const notesReducer = (notes: Note[] = [], action: Action) => {
+const notesReducer = (notes: Note[] = [], action: AddNoteAction | RemoveNoteAction) => {
   switch (action.type) {
     case ADD_NOTE:
       const lastNote = notes.length > 0 ? notes[notes.length - 1] : notes[0];
@@ -8,7 +8,7 @@ const notesReducer = (notes: Note[] = [], action: Action) => {
       return [...notes, { ...action.payload, id: lastNoteId + 1 }];
 
     case REMOVE_NOTE:
-      const { id } = action.payload as NoteId;
+      const { id } = action.payload;
       return notes.filter(note => note.id !== id);
 
     default:
