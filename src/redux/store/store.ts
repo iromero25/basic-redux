@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 
 export type Store = ReturnType<typeof rootReducer>;
 
-const initialState = {
+const initialState: Store = {
   notes: [
     {
       id: 1,
@@ -30,7 +30,9 @@ const initialState = {
       tag: TagValues.normal,
     },
   ],
+  // this is why `undefined` needs to  be  specified  as
+  // part of the return types for the `visibilityReducer`
   visibility: undefined,
 };
 
-export default createStore(rootReducer, initialState as any); // I still have the problem typing the intitial state
+export default createStore(rootReducer, initialState);

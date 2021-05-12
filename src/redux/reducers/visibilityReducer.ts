@@ -10,6 +10,9 @@ import { FILTER_NOTE, FilterNoteAction, TagValues } from "../actions/actions";
 const visibilityReducer = (
   visibility = TagValues.showAll,
   action: FilterNoteAction
-): TagValues => (action.type === FILTER_NOTE ? action.payload.tag : visibility);
+): TagValues | undefined =>
+  action.type === FILTER_NOTE ? action.payload.tag : visibility;
+// above, return type includes `undefined` so it can be used to type the root
+// store: the visibility part of the store could be empty
 
 export default visibilityReducer;
