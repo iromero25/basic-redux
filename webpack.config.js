@@ -47,4 +47,8 @@ const clientConfig = Object.assign({}, config, {
   ],
 });
 
-module.exports = [serverConfig, clientConfig];
+// I do not longer use the server config but I'd like  to  leave it
+// around as an example of how to use two configs onw webpack filer
+
+// module.exports = [serverConfig, clientConfig];
+module.exports = clientConfig;

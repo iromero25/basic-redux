@@ -22,17 +22,26 @@ As mentioned, I am avoiding babel, therefore `ts-loader` is in charge of all the
 The reasons I wanted to move away from babel:
 
 1. We need to compile typescript code into a version of javascript that can be handled by all (or a majority of) browsers and that's done by `ts-loader` so why having babel as well?
-1. Babel can deal with typescript compiling but seems we still need to use `ts-loader` no matter what. Also, some documentation mentions while babel does check code for typing, it still allows us to compile the code withouth enforcing typing, so I wanted to avoid that.
+1. Babel can deal with typescript compiling but some documentation suggests while it checks code for typing, it still allows us to compile the code (by removing the types) and thus, not enforcing typing. I wanted to avoid that.
 
 ## webpack configuration
 
-Webpack is using `ts-loading` as the compiler to go through before bundling the codebase. Simple.
+Webpack is using `ts-loader` as the compiler to go through before bundling the codebase. Simple.
 
 However, after inspecting the webpack config we can find two configurations that will ultimately create two bundles: one for the client (front-end) and another for the back-end (the server).
 
 The reason behind this is that the `target` property inside webpack's config specifies where the bundle is to be used and thus uses different rules to include library dependencies.
 The targets we need to use are `web` for client bundle code (default) and `node` for back-end. Since those targets cannot be mixed in one, we need to create two different configs.
 Look at the [official docs](https://webpack.js.org/concepts/targets/) where this is documented.
+
+
+## tsconfig
+**Updated**: I no longer depend on webpack to compile the server code as this was creating a bundle (and as a consequence, a bigger than required file) for the server. I understood the following: 
+
+1. I only need the server file compiled, not bundled. 
+1. That task is tackled by the `build:server` script which in turn, relies on the `tsconfig.server.json`
+1. The `tsconfig.server.json` is a separate config from `tsconfig.json` since the latter is related to the configuration used by `ts-loader` in the webpack config.
+1. The `tsconfig.server.json` specifies `"module":"CommonJS"` since I want the ES6 module imports to be compiled to CommonJS so `node` can be used to run the generated `server.js` without trouble.
 
 ## server
 I am avoiding using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
