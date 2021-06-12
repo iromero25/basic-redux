@@ -3,9 +3,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import AllNotes from "./AllNotes";
 import store from "../redux/store/store";
-
-// provides a set of custom jest matchers that you can use to extend jest
-// i.e. `.toBeVisible`
+import { addNote, TagValues } from "../redux/actions/actions";
 import "@testing-library/jest-dom";
 
 const Wrapper: React.FC = ({ children }) => (
@@ -13,11 +11,19 @@ const Wrapper: React.FC = ({ children }) => (
 );
 
 test("AllNotes component is rendered with initial values", () => {
-  const { getByText } = render(
+  const { getByText, queryByText } = render(
     <Wrapper>
       <AllNotes />
     </Wrapper>
   );
+
+  const title = "Added title";
+  const testContent = "Added content";
   const noteTitle = getByText("You are awesome");
   expect(noteTitle).toBeInTheDocument();
+  expect(queryByText(title)).not.toBeInTheDocument;
+
+  // dispath the action adding a new Note into the DOM
+  store.dispatch(addNote(title, testContent, TagValues.normal));
+  expect(getByText(title)).toBeInTheDocument();
 });

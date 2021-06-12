@@ -4,6 +4,7 @@
   "description": "Simple React app using Redux for state management.",
   "main": "index.js",
   "scripts": {
+    "test": "jest test",
     "build:server": "tsc -p tsconfig.server.json",
     "build:dev": "webpack --mode=development",
     "build": "webpack --mode=production && yarn build:server",

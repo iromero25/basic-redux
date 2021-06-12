@@ -54,8 +54,10 @@ const NoteForm: React.FC<ReduxProps> = ({ addNote }) => {
     <>
       <h3>Add a Note</h3>
       <form onSubmit={handleSubmission}>
-        Title: <br />
+        <label htmlFor="title">Title:</label>
+        <br />
         <input
+          id="title"
           type="text"
           name="title"
           ref={titleRef}
@@ -64,8 +66,10 @@ const NoteForm: React.FC<ReduxProps> = ({ addNote }) => {
           onChange={e => setTitle(e.target.value)}
         />
         <br />
-        Content: <br />
+        <label htmlFor="content">Content:</label>
+        <br />
         <textarea
+          id="content"
           name="content"
           value={content}
           style={{ width: elementWidth * 1.5, height: 90 }}

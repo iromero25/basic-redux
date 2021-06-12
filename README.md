@@ -1,4 +1,5 @@
 # basic-redux
+
 Simple React app using Redux for state management. Typescrypt is used as programming language.
 
 The working app is available at this [url](https://iromero-basic-redux.herokuapp.com/).
@@ -12,9 +13,9 @@ The working app is available at this [url](https://iromero-basic-redux.herokuapp
 
 **Interesting parts to look at in the codebase**
 
-* Redux creates and initializes a [store](./src/redux/store/store.ts).
-* Reducers take care of modifying a **specific** part of the state.
-* If a store fails to initialize a particular part of the state, then the responsibility of initializing that part falls into the **related** reducer. This case happens for the [visibility](./src/redux/reducers/visibilityReducer.ts) reducer as the visibility is not specified as part of the [store's](./src/redux/store/store.ts) initial state.
+- Redux creates and initializes a [store](./src/redux/store/store.ts).
+- Reducers take care of modifying a **specific** part of the state.
+- If a store fails to initialize a particular part of the state, then the responsibility of initializing that part falls into the **related** reducer. This case happens for the [visibility](./src/redux/reducers/visibilityReducer.ts) reducer as the visibility is not specified as part of the [store's](./src/redux/store/store.ts) initial state.
 
 ## ts-loader
 
@@ -34,24 +35,39 @@ The reason behind this is that the `target` property inside webpack's config spe
 The targets we need to use are `web` for client bundle code (default) and `node` for back-end. Since those targets cannot be mixed in one, we need to create two different configs.
 Look at the [official docs](https://webpack.js.org/concepts/targets/) where this is documented.
 
-
 ## tsconfig
-**Updated**: I no longer depend on webpack to compile the server code as this was creating a bundle (and as a consequence, a bigger than required file) for the server. I understood the following: 
 
-1. I only need the server file compiled, not bundled. 
+**Updated**: I no longer depend on webpack to compile the server code as this was creating a bundle (and as a consequence, a bigger than required file) for the server. I understood the following:
+
+1. I only need the server file compiled, not bundled.
 1. That task is tackled by the `build:server` script which in turn, relies on the `tsconfig.server.json`
 1. The `tsconfig.server.json` is a separate config from `tsconfig.json` since the latter is related to the configuration used by `ts-loader` in the webpack config.
 1. The `tsconfig.server.json` specifies `"module":"CommonJS"` since I want the ES6 module imports to be compiled to CommonJS so `node` can be used to run the generated `server.js` without trouble.
 
 ## server
+
 I am avoiding using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
 Since we take care of compiling the `server.ts` file into javascript code in the `dist` file, then `node` can be used to run the server.
 
 ## notes on dependencies
+
 Version 4 of `html-webpack-plugin` is required instead of version 5 as the latter presents an error when specifying the plugin configuration to move the `src/index.html` file into `dist`
 
+## Testing
+
+I am introducing a little bit of component testing using the Tesing-Library library for React.
+
+The reason behind being using this library intead of others (like Enzyme) is its approach to test what is seen by the user (this is, the UI) and getting to test the updates to the DOM by the user's interaction with the UI such as clicking buttons and filling forms.
+
+For this app, I am introducing very simple, yet powerful testing:
+
+1. [Example.test.tsx](./src/components/Example.test.tsx) tests rendering a simple React component and checks that the DOM is effectively updated after its state is updated.
+1. [AllNotes.test.tsx](./src/components/AllNotes.test.tsx) tests a component that is hooked up with Redux for state management and thus shows the initial values. We also check the DOM is updated when manually triggering an action.
+1. [App.test.tsx](./src/components/App.test.tsx) goes a little bit further and checks that the DOM is updated accordingly after filling the values of the Note Form component and clicking the button provided (that in turn, triggers the action updating the store). We can think if this "little" test as an example of an end-to-end test.
+
 ## NPM Registry and Library dependencies
-The *npm registry* is the repository location used as source to install all the library dependencies specified in `package.json`. Often, the registy points to a corporate (and thus private) repository that is managed by the company we work for. To have a look at the registry's configuration, we can use `yarn config get registry`. If this is the case, all dependencies in the `yarn.lock` file will be pointing to a place in that private registry URL where the libraries reside.
+
+The _npm registry_ is the repository location used as source to install all the library dependencies specified in `package.json`. Often, the registy points to a corporate (and thus private) repository that is managed by the company we work for. To have a look at the registry's configuration, we can use `yarn config get registry`. If this is the case, all dependencies in the `yarn.lock` file will be pointing to a place in that private registry URL where the libraries reside.
 
 This is bad thing to do specially when deploying to Heroku as it doesn't (and should never) have access to a corporate registry, therefore, the libraries won't be found nor installed.
 
