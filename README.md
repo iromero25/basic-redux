@@ -46,7 +46,7 @@ Look at the [official docs](https://webpack.js.org/concepts/targets/) where this
 
 ## server
 
-I am avoiding using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
+I avoid using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
 Since we take care of compiling the `server.ts` file into javascript code in the `dist` file, then `node` can be used to run the server.
 
 ## notes on dependencies
