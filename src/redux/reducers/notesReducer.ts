@@ -1,4 +1,10 @@
-import { ADD_NOTE, REMOVE_NOTE, AddNoteAction, RemoveNoteAction, Note, NoteId } from "../actions/actions";
+import {
+  ADD_NOTE,
+  REMOVE_NOTE,
+  AddNoteAction,
+  RemoveNoteAction,
+  Note,
+} from "../actions/actions";
 
 const notesReducer = (notes: Note[] = [], action: AddNoteAction | RemoveNoteAction) => {
   switch (action.type) {

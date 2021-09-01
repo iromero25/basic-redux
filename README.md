@@ -15,7 +15,16 @@ The working app is available at this [url](https://iromero-basic-redux.herokuapp
 
 - Redux creates and initializes a [store](./src/redux/store/store.ts).
 - Reducers take care of modifying a **specific** part of the state.
+  - **Important:** Redux Reducers **always** keep track of the current state of the store. Remember the first parameter of any reducer maps to the slice of the store they manage and therefore, its current content. The `notes` param at [notesReducer](./src/redux/reducers/notesReducer.ts) for example, always contains ALL the current notes that have being added to the app at any point of the execution.
 - If a store fails to initialize a particular part of the state, then the responsibility of initializing that part falls into the **related** reducer. This case happens for the [visibility](./src/redux/reducers/visibilityReducer.ts) reducer as the visibility is not specified as part of the [store's](./src/redux/store/store.ts) initial state.
+
+## Build this report locally
+
+Execute the following scripts using yarn in order:
+
+1. yarn
+2. yarn build
+3. yarn start
 
 ## ts-loader
 
@@ -49,7 +58,7 @@ Look at the [official docs](https://webpack.js.org/concepts/targets/) where this
 I avoid using `babel-node` to run the server as it is mentioned in the [babel docs](https://babeljs.io/docs/en/babel-node) that it should be avoided in production since the library is heavy.
 Since we take care of compiling the `server.ts` file into javascript code in the `dist` file, then `node` can be used to run the server.
 
-## notes on dependencies
+## Notes on dependencies
 
 Version 4 of `html-webpack-plugin` is required instead of version 5 as the latter presents an error when specifying the plugin configuration to move the `src/index.html` file into `dist`
 
@@ -64,6 +73,8 @@ For this app, I am introducing very simple, yet powerful testing:
 1. [Example.test.tsx](./src/components/Example.test.tsx) tests rendering a simple React component and checks that the DOM is effectively updated after its state is updated.
 1. [AllNotes.test.tsx](./src/components/AllNotes.test.tsx) tests a component that is hooked up with Redux for state management and thus shows the initial values. We also check the DOM is updated when manually triggering an action.
 1. [App.test.tsx](./src/components/App.test.tsx) goes a little bit further and checks that the DOM is updated accordingly after filling the values of the Note Form component and clicking the button provided (that in turn, triggers the action updating the store). We can think if this "little" test as an example of an end-to-end test.
+
+Execute the `yarn test` command to run all tests locally.
 
 ## NPM Registry and Library dependencies
 
