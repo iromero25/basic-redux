@@ -1,0 +1,10 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "rules": {},
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended", // Recommended rules from @eslint-plugin-react
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended" // Recommended rules from @typescript-eslint/eslint-plugin
+  ]
+}
